@@ -1,0 +1,44 @@
+Models -> Estrutura dos dados, esquema de I/O de dados, modelos do banco de dados
+Routes -> Define as rotas da API
+Services -> Coordena ação de vários repositórios, validação de regras, orquestra chamadas externas. Ex: register_user
+Controllers -> Receber requisições tratadas do FastAPI, chamar serviços, retornar a resposta com o formato correto ou erros tratados
+Repositories -> Faz a query e crud no banco de dados
+DB -> Camada de acesso aos bancos de dados
+
+🧭 1. Rota (FastAPI Router)
+Responsável por:
+    Receber requisições HTTP.
+    Validar o formato dos dados com os models (Pydantic).
+    Chamar o controller para processar.
+    
+Não faz:
+    Lógica de negócio ou acesso a banco.
+
+🧱 2. Controller (ou handler)
+Responsável por:
+    Orquestrar a lógica da rota.
+    Chamar os services.
+    Tratar exceções e retornar respostas HTTP adequadas (status, mensagens).
+
+Exemplo de erro tratado aqui:
+if not user:
+    raise HTTPException(status_code=404, detail="Usuário não encontrado")
+
+🧠 3. Service (lógica de negócio)
+Responsável por:
+    Validar regras de negócio (ex: email único, nota entre 0–5).
+    Combinar chamadas a diferentes repositórios, se necessário.
+    Chamar o repositório para interagir com o banco.
+
+💾 4. Repository (acesso ao banco)
+Responsável por:
+    Executar operações diretamente no banco de dados (MongoDB, Neo4j, etc).
+    Inserir, buscar, atualizar ou deletar registros.
+
+Não faz:
+    Validações de regra de negócio.
+    Retorno HTTP ou manipulação de erros HTTP.
+
+📦 5. Models (Pydantic + banco)
+    Pydantic models: Validam a entrada e saída da API (UserCreate, UserOut etc).
+    ORM/ODM models (SQLAlchemy, Mongo, etc): representam o dado no banco (opcional no Mongo, obrigatório no SQL).
