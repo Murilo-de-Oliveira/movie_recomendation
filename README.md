@@ -41,7 +41,7 @@ Backend desenvolvido em Python com FastAPI, utilizando MongoDB e Neo4J para cons
 ## 📦 Como rodar o projeto localmente
 
 1. Clone o repositório:
-   git clone https://github.com/seu-usuario/movie-recommender-backend.git
+   git clone https://github.com/seu-usuario/movie-recommendation.git
    cd movie-recommender-backend
 
 2. Crie e ative um ambiente virtual:
@@ -55,18 +55,11 @@ Backend desenvolvido em Python com FastAPI, utilizando MongoDB e Neo4J para cons
    - Copie .env.example para .env e preencha os valores.
 
 5. Inicie o servidor:
-   uvicorn app.main:app --reload
+   uvicorn main:app --reload
 
 ## 🧪 Rodando os testes
 
 pytest tests/
-
-## 📌 TODO
-
-- [ ] Dockerização
-- [ ] Testes de integração
-- [ ] Documentação das rotas com Swagger
-- [ ] GitHub Actions para CI/CD
 
 ## 📄 Licença
 
@@ -74,4 +67,4 @@ Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para ma
 
 ## 🙋‍♂️ Autor
 
-Desenvolvido por [Seu Nome Aqui].
+Desenvolvido por Murilo de Oliveira.
