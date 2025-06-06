@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import user_route, movie_route
+from routes import user_route, movie_route, interaction_route
 
 #app = FastAPI(
 #    title="Movie App API",
@@ -10,7 +10,8 @@ from routes import user_route, movie_route
 app = FastAPI()
 
 app.include_router(user_route.router, prefix="/users", tags=["Usuários"])
-app.include_router(movie_route.router, prefix='/movies', tags=["Filmes"])
+app.include_router(movie_route.router, prefix="/movies", tags=["Filmes"])
+app.include_router(interaction_route.router, prefix="/interactions", tags=["Interactions"])
 
 @app.get("/")
 def read_root():
