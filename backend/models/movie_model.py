@@ -37,6 +37,7 @@ class MovieCreate(BaseModel):
         }
     
 class MovieOut(BaseModel):
+    id: str
     title: str
     duration: str
     rate: float
