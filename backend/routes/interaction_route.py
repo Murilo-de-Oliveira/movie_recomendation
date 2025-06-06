@@ -10,7 +10,7 @@ def like_movie_router(
 ):
     return like_movie_controller(review)
 
-@router.post("/users/also_liked/{movie_id}")
+@router.get("/users/also_liked/{movie_id}")
 def recommendation_router(
     movie_id: str
 ):
