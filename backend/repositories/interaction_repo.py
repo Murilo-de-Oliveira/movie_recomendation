@@ -19,3 +19,17 @@ def like_movie_repo(review: dict):
             "comment": review['comment']
         }
     )
+
+def recommendation_repo(movie_id):
+    session = get_neo4j_session()
+    result = session.execute_read(
+        query="""
+            MATCH (:Movie {id: $movie_id})<-[:RATED]-(u:User)-[:RATED]->(m2:Movie)
+            WHERE m2.id <> $movie_id
+            RETURN m2.id AS id, m2.title AS title, count(*) AS relevance
+            ORDER BY relevance DESC
+            LIMIT 10
+        """,
+        parameters={"id": movie_id}
+    )
+    return result
