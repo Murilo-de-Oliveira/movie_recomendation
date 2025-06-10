@@ -20,4 +20,3 @@ def recommendation_controller(movie_id) -> dict:
             detail="Filme errado, mané"
         )
     return recommendation
-

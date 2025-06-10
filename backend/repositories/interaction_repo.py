@@ -24,10 +24,14 @@ def recommendation_repo(movie_id: str):
     session = get_neo4j_session()
     result = session.execute_read(
         query="""
-            MATCH (m:Movie {id: $movie_id})<-[:RATED]-(u:User)-[:RATED]->(m2:Movie)
+            MATCH (m:Movie {id: $movie_id})<-[:RATED]-(u:User)-[r:RATED]->(m2:Movie)
             WHERE m2.id <> $movie_id
-            RETURN m2.id AS id, m2.title AS title, count(*) AS relevance
-            ORDER BY relevance DESC
+            RETURN 
+                m2.id AS id,
+                m2.title AS title,
+                avg(r.rate) AS avg_rating,
+                count(*) AS relevance
+            ORDER BY relevance DESC, avg_rating DESC
             LIMIT 10
         """,
         parameters={"movie_id": movie_id}
