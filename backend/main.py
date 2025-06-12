@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from routes import user_route, movie_route, interaction_route
 
 #app = FastAPI(
@@ -8,6 +9,14 @@ from routes import user_route, movie_route, interaction_route
 #)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # para testes. Em produção, restrinja!
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(user_route.router, prefix="/users", tags=["Usuários"])
 app.include_router(movie_route.router, prefix="/movies", tags=["Filmes"])
