@@ -26,7 +26,7 @@ class UserCreate(BaseModel):
 class UserOut(BaseModel):
     id: str
     name: str
-    email: str
+    email: EmailStr
 
 class UserUpdate(BaseModel):
     name: Optional[str] = None

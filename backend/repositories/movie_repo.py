@@ -13,7 +13,6 @@ def get_neo4j_session():
 def create_movie_repo(movie_data: MovieCreate) -> str:
     collection = get_mongo_session()
     movie_dict = movie_data.model_dump()
-    movie_dict['rate'] = 0
     result = collection.insert_one(movie_dict)
     return str(result.inserted_id)
 

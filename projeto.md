@@ -5,7 +5,7 @@
 ## Bancos de dados utilizados: MongoDB, Neo4J
 
 ## Tema do projeto:
-O projeto consiste em um sistema de recomendação de filmes. Nele, os usuários podem criar uma conta para escrever resenhas e avaliar os filmes que assistiram. A cada nova avaliação ou resenha publicada, o sistema gera recomendações personalizadas com base nesse conteúdo. A proposta é desenvolver uma versão simplificada de plataformas como o Letterboxd..
+O projeto consiste em um sistema de recomendação de filmes. Nele, os usuários podem criar uma conta para escrever resenhas e avaliar os filmes que assistiram. A cada nova avaliação ou resenha publicada, o sistema gera recomendações personalizadas com base nesse conteúdo. A proposta é desenvolver uma versão simplificada de plataformas como o Letterboxd.
 
 ## Uso dos bancos de dados:
 ### MongoDB

@@ -9,6 +9,7 @@ class MovieCreate(BaseModel):
     genre: str
     synopsis: str
     year: int
+    rate: float
 
     @field_validator('genre')
     def validate_genre(cls, genre):
@@ -29,7 +30,8 @@ class MovieCreate(BaseModel):
                 "director": "Diretor",
                 "genre": "Drama",
                 "synopsis": "This is a short synopsis",
-                "year": 2000 
+                "year": 2000, 
+                "rate":5
             }
         }
     
@@ -48,6 +50,7 @@ class MovieUpdate(BaseModel):
     genre: Optional[str] = None
     synopsis: Optional[str] = None
     year: Optional[int] = None
+    rate: Optional[float] = None
 
     class Config:
         json_schema_extra = {
@@ -56,6 +59,7 @@ class MovieUpdate(BaseModel):
                 "director": "Diretor",
                 "genre": "Drama",
                 "synopsis": "This is a short synopsis",
-                "year": 2000 
+                "year": 2000,
+                "rate": 5
             }
         }
