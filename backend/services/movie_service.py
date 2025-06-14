@@ -19,10 +19,10 @@ def get_movie_service(id: str) -> dict:
     movie_dict = {
         "id":str(movie['_id']),
         "title":movie['title'],
-        "rate":movie['rate'],
-        "duration":movie['duration'],
+        "director":movie['director'],
         "genre":movie['genre'],
-        "classification":movie['classification']
+        "rate":movie['rate'],
+        "year":movie['year']
     }
     return movie_dict
 

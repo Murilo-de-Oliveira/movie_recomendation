@@ -8,7 +8,7 @@ router = APIRouter()
     "/create_movie",
     status_code=status.HTTP_201_CREATED,
     summary="Criar um novo filme",
-    description="Cria um novo filme com título, gênero, duração e classificação indicativa.",
+    description="Cria um novo filme com título, .",
     response_description="Mensagem de sucesso e ID do novo filme."
 )
 def create_movie_route(movie: MovieCreate) -> dict:

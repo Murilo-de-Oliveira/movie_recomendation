@@ -1,18 +1,14 @@
 from typing import Optional
 from pydantic import BaseModel, field_validator
 
-valid_genres = ['Ação', 'Comédia', 'Drama']
-valid_classification = ['0','3','10','12','14','16','18']
+valid_genres = ['Ação', 'Comédia', 'Drama', 'Terror', 'Ficção Científica', 'Romance']
 
 class MovieCreate(BaseModel):
     title: str
-    duration: str
+    director: str
     genre: str
-    classification: str
-
-    @field_validator('duration')
-    def validate_duration(cls, duration):
-        return duration
+    synopsis: str
+    year: int
 
     @field_validator('genre')
     def validate_genre(cls, genre):
@@ -20,42 +16,46 @@ class MovieCreate(BaseModel):
             raise ValueError('Gênero não listado')
         return genre
     
-    @field_validator('classification')
-    def validate_classfication(cls, classification):
-        if not classification in valid_classification:
-            raise ValueError('Classificação não listada')
-        return classification
+    @field_validator('year')
+    def validate_year(cls, year):
+        if year <= 1880 or year >= 2025:
+            raise ValueError('Ano de Lançamento inválido')
+        return year
     
     class Config:
         json_schema_extra = {
             "example": {
                 "title": "Título do filme",
-                "duration": "01:30:00",
+                "director": "Diretor",
                 "genre": "Drama",
-                "classification": "10"
+                "synopsis": "This is a short synopsis",
+                "year": 2000 
             }
         }
     
 class MovieOut(BaseModel):
     id: str
     title: str
-    duration: str
-    rate: float
+    director: str
     genre: str
-    classification: str
+    synopsis: str
+    year: int
+    rate: float
 
 class MovieUpdate(BaseModel):
     title: Optional[str] = None
-    duration: Optional[str] = None
+    director: Optional[str] = None
     genre: Optional[str] = None
-    classification: Optional[str] = None
+    synopsis: Optional[str] = None
+    year: Optional[int] = None
 
     class Config:
         json_schema_extra = {
             "example": {
                 "title": "Título do filme",
-                "duration": "01:30:00",
+                "director": "Diretor",
                 "genre": "Drama",
-                "classification": "10"
+                "synopsis": "This is a short synopsis",
+                "year": 2000 
             }
         }
