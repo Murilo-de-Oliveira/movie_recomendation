@@ -1,5 +1,5 @@
 import logging
-from repositories.user_repo import create_user_repo, get_user_repo, update_user_repo, delete_user_repo, create_user_node, update_user_node, delete_user_node
+from repositories.user_repo import create_user_repo, get_user_repo, get_all_users_repo, update_user_repo, delete_user_repo, create_user_node, update_user_node, delete_user_node
 from models.user_model import UserCreate, UserUpdate
 import re
 
@@ -45,6 +45,20 @@ def get_user_service(id: str):
         "email":user['email']
     }
     return user_dict
+
+def get_all_user_service():
+    user_list = get_all_users_repo()
+    if not user_list:
+        return []
+    user_list_dict = []
+    for user in user_list:
+        user_dict = {
+            "id":str(user['_id']),
+            "name":user['name'],
+            "email":user['email']
+        }
+        user_list_dict.append(user_dict)
+    return user_list_dict
 
 def update_user_service(id: str, user: UserUpdate):
     if user.password:

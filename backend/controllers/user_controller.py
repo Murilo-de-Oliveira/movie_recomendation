@@ -1,6 +1,6 @@
 from fastapi import HTTPException, status
 from models.user_model import UserCreate, UserUpdate
-from services.user_service import create_user_service, get_user_service, update_user_service, delete_user_service
+from services.user_service import create_user_service, get_user_service, get_all_user_service, update_user_service, delete_user_service
 
 def create_user_controller(user_data: UserCreate) -> str:
     return create_user_service(user_data)
@@ -13,6 +13,12 @@ def get_user_controller(id: str):
             detail="Usuário não encontrado"
         )
     return user
+
+def get_all_users_controller():
+    user_list = get_all_user_service()
+    if not user_list:
+        return []
+    return user_list
 
 def update_user_controller(id: str, user: UserUpdate):
     try:

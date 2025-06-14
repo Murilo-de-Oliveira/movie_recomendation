@@ -1,6 +1,7 @@
+from typing import List
 from fastapi import APIRouter, status
 from models.user_model import UserCreate, UserOut, UserUpdate
-from controllers.user_controller import create_user_controller, get_user_controller, update_user_controller, delete_user_controller
+from controllers.user_controller import create_user_controller, get_user_controller, get_all_users_controller, update_user_controller, delete_user_controller
 
 router = APIRouter()
 
@@ -15,6 +16,17 @@ def create_user_route(user: UserCreate) -> dict:
     """Rota de criação de usuários"""
     user_id = create_user_controller(user)
     return {"message": "Usuário criado com sucesso!", "id": str(user_id)}
+
+@router.get(
+    "/all_users",
+    response_model=List[UserOut],
+    summary="Obter todos os usuários",
+    description="Retorna os dados públicos (nome e email) de um usuário."
+)
+def get_all_user_route():
+    """Rota de buscar todos os usuários"""
+    users = get_all_users_controller()
+    return users
 
 @router.get(
     "/{id}",

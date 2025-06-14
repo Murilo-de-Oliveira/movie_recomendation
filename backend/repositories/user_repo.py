@@ -24,6 +24,11 @@ def get_user_repo(id: str):
     session = get_mongo_session()
     return session.find_one({"_id": object_id})
 
+def get_all_users_repo():
+    session = get_mongo_session()
+    users_list = list(session.find())
+    return users_list
+
 def update_user_repo(id: str, user_data: UserUpdate) -> bool:
     try:
         object_id = ObjectId(id)

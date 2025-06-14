@@ -1,27 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Lista de Usuários</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .user-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .user-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+
+    .user-card:hover {
+      transform: scale(1.02);
+    }
+
+    .user-name {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .user-email {
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <div class="navbar">
-        <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a>
-        <a href="#"><i class="fa fa-fw fa-search"></i> Search</a>
-        <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
-        <a href="#"><i class="fa fa-fw fa-user"></i> Login</a>
-    </div>
+  <h1>Usuários Cadastrados</h1>
 
-    <div class="user-list">
-        <h2>Lista de Usuários</h2>
-    </div>
+  <div class="user-grid" id="userGrid"></div>
 
-    <div class="movie-list">
-        <h2>Lista de Filmes</h2>
-    </div>    
-    
+  <script>
+    async function fetchUsers() {
+      try {
+        const response = await fetch("http://localhost:8000/users/all_users");
+        const users = await response.json();
+
+        const grid = document.getElementById("userGrid");
+        users.forEach(user => {
+          const card = document.createElement("div");
+          card.className = "user-card";
+          card.onclick = () => {
+            window.location.href = `/user_details.html?id=${user.id}`;
+          };
+
+          card.innerHTML = `
+            <div class="user-name">${user.name}</div>
+            <div class="user-email">${user.email}</div>
+          `;
+
+          grid.appendChild(card);
+        });
+      } catch (error) {
+        console.error("Erro ao buscar usuários:", error);
+      }
+    }
+
+    fetchUsers();
+  </script>
 </body>
 </html>
