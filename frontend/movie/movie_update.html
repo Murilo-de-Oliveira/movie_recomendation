@@ -1,0 +1,44 @@
+<!-- movie_update.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Atualizar Filme</title>
+</head>
+<body>
+  <h1>Atualizar Filme</h1>
+  <form id="updateForm">
+    <label>Título: <input type="text" id="title" /></label><br>
+    <label>Diretor: <input type="text" id="director" /></label><br>
+    <label>Gênero: <input type="text" id="genre" /></label><br>
+    <label>Ano: <input type="number" id="year" /></label><br>
+    <label>Nota: <input type="number" id="rate" step="0.1" /></label><br>
+    <label>Sinopse: <textarea id="synopsis"></textarea></label><br>
+    <button type="submit">Atualizar</button>
+  </form>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const movieId = params.get("id");
+
+    document.getElementById("updateForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+      const data = {
+        title: document.getElementById("title").value,
+        director: document.getElementById("director").value,
+        genre: document.getElementById("genre").value,
+        year: parseInt(document.getElementById("year").value),
+        rate: parseFloat(document.getElementById("rate").value),
+        synopsis: document.getElementById("synopsis").value
+      };
+      await fetch(`http://localhost:8000/movies/${movieId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      alert("Filme atualizado com sucesso");
+      window.location.href = `movie_details.html?id=${movieId}`;
+    });
+  </script>
+</body>
+</html>

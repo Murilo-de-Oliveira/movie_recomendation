@@ -1,0 +1,39 @@
+<!-- movie_details.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalhes do Filme</title>
+</head>
+<body>
+  <h1>Detalhes do Filme</h1>
+  <div id="movieDetails"></div>
+  <button onclick="window.location.href='movie_update.html?id='+movieId">Editar</button>
+  <button onclick="deleteMovie()">Deletar</button>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const movieId = params.get("id");
+
+    async function getMovie() {
+      const response = await fetch(`http://localhost:8000/movies/${movieId}`);
+      const movie = await response.json();
+      document.getElementById("movieDetails").innerHTML = `
+        <p><strong>Título:</strong> ${movie.title}</p>
+        <p><strong>Diretor:</strong> ${movie.director}</p>
+        <p><strong>Gênero:</strong> ${movie.genre}</p>
+        <p><strong>Ano:</strong> ${movie.year}</p>
+        <p><strong>Nota:</strong> ${movie.rate}</p>
+        <p><strong>Sinopse:</strong> ${movie.synopsis}</p>`;
+    }
+
+    async function deleteMovie() {
+      await fetch(`http://localhost:8000/movies/${movieId}`, { method: "DELETE" });
+      alert("Filme deletado com sucesso");
+      window.location.href = "index.html";
+    }
+
+    getMovie();
+  </script>
+</body>
+</html>

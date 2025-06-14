@@ -5,7 +5,7 @@ from neo4j.exceptions import Neo4jError
 logging.basicConfig(level=logging.INFO)
 
 class Database:
-    def __init__(self, uri="bolt://44.201.242.161:7687", user="neo4j", password="casualties-insignia-tensions"):
+    def __init__(self, uri="bolt://44.202.199.10:7687", user="neo4j", password="semiconductor-boxes-handler"):
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
 
     def close(self):
