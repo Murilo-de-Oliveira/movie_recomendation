@@ -1,7 +1,7 @@
 from typing import Optional
 from pydantic import BaseModel, field_validator
 
-valid_genres = ['Ação', 'Comédia', 'Drama', 'Terror', 'Ficção Científica', 'Romance']
+valid_genres = ['Ação', 'Comédia', 'Drama', 'Terror', 'Ficção Científica', 'Romance', 'Aventura', 'Suspense']
 
 class MovieCreate(BaseModel):
     title: str

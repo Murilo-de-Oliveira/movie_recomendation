@@ -1,0 +1,44 @@
+*Adicionar o create primeiro*
+CREATE (:User {id: "684dd4f64de53438de768bd4", name: "Alice Silva"})
+CREATE (:User {id: "684dd4f84de53438de768bd6", name: "Bruno Costa"})
+CREATE (:User {id: "684dd4fb4de53438de768bd8", name: "Carlos Lima"})
+CREATE (:User {id: "684dd5144de53438de768bda", name: "Daniela Souza"})
+
+CREATE (:Movie {id: "684dd52d4de53438de768bdc", title: "A Esperança"})
+CREATE (:Movie {id: "684dd55d4de53438de768bde", title: "Viagem no Tempo"})
+CREATE (:Movie {id: "684dd5a14de53438de768be0", title: "Segredos do Mar"})
+CREATE (:Movie {id: "684dd5a44de53438de768be2", title: "Códigos Perdidos"})
+
+*Só após isso inserir esse código*
+// Alice Silva curtiu A Esperança
+MATCH (u:User {id: "684dd4f64de53438de768bd4"}), (m:Movie {id: "684dd52d4de53438de768bdc"})
+MERGE (u)-[:RATED {rate: 5, comment: "Um filme emocionante e inspirador!"}]->(m);
+
+// Alice Silva curtiu Viagem no Tempo
+MATCH (u:User {id: "684dd4f64de53438de768bd4"}), (m:Movie {id: "684dd55d4de53438de768bde"})
+MERGE (u)-[:RATED {rate: 4, comment: "Viagem no tempo é sempre um bom tema."}]->(m);
+
+// Bruno Costa curtiu Viagem no Tempo
+MATCH (u:User {id: "684dd4f84de53438de768bd6"}), (m:Movie {id: "684dd55d4de53438de768bde"})
+MERGE (u)-[:RATED {rate: 5, comment: "História envolvente e bem dirigida."}]->(m);
+
+// Bruno Costa curtiu Códigos Perdidos
+MATCH (u:User {id: "684dd4f84de53438de768bd6"}), (m:Movie {id: "684dd5a44de53438de768be2"})
+MERGE (u)-[:RATED {rate: 4, comment: "Cheio de mistérios e reviravoltas!"}]->(m);
+
+// Carlos Lima curtiu Segredos do Mar
+MATCH (u:User {id: "684dd4fb4de53438de768bd8"}), (m:Movie {id: "684dd5a14de53438de768be0"})
+MERGE (u)-[:RATED {rate: 3, comment: "Belo visual, mas história fraca."}]->(m);
+
+// Daniela Souza curtiu A Esperança
+MATCH (u:User {id: "684dd5144de53438de768bda"}), (m:Movie {id: "684dd52d4de53438de768bdc"})
+MERGE (u)-[:RATED {rate: 5, comment: "Chorei horrores, excelente!"}]->(m);
+
+// Daniela Souza curtiu Viagem no Tempo
+MATCH (u:User {id: "684dd5144de53438de768bda"}), (m:Movie {id: "684dd55d4de53438de768bde"})
+MERGE (u)-[:RATED {rate: 4, comment: "Gostei bastante da proposta científica."}]->(m);
+
+// Daniela Souza curtiu Códigos Perdidos
+MATCH (u:User {id: "684dd5144de53438de768bda"}), (m:Movie {id: "684dd5a44de53438de768be2"})
+MERGE (u)-[:RATED {rate: 4, comment: "Muito suspense e enigmas!"}]->(m);
+
