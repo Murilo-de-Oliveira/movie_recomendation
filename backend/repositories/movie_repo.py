@@ -25,6 +25,11 @@ def get_movie_repo(id: str):
     session = get_mongo_session()
     return session.find_one({"_id": object_id})
 
+def get_all_movies_repo():
+    session = get_mongo_session()
+    movies_list = list(session.find())
+    return movies_list
+
 def update_movie_repo(id: str, movie_data: MovieUpdate):
     try:
         object_id = ObjectId(id)

@@ -1,6 +1,6 @@
 import logging
 from models.movie_model import MovieCreate, MovieUpdate
-from repositories.movie_repo import create_movie_repo, get_movie_repo, update_movie_repo, delete_movie_repo, create_movie_node, update_movie_node, delete_movie_node
+from repositories.movie_repo import create_movie_repo, get_all_movies_repo, get_movie_repo, update_movie_repo, delete_movie_repo, create_movie_node, update_movie_node, delete_movie_node
 
 def create_movie_service(movie_data: MovieCreate) -> str:
     movie_id = create_movie_repo(movie_data)
@@ -22,9 +22,28 @@ def get_movie_service(id: str) -> dict:
         "director":movie['director'],
         "genre":movie['genre'],
         "rate":movie['rate'],
-        "year":movie['year']
+        "year":movie['year'],
+        "synopsis":movie['synopsis']
     }
     return movie_dict
+
+def get_all_movie_service():
+    movie_list = get_all_movies_repo()
+    if not movie_list:
+        return []
+    movie_list_dict = []
+    for movie in movie_list:
+        movie_dict = {
+            "id":str(movie['_id']),
+            "title":movie['title'],
+            "director":movie['director'],
+            "genre":movie['genre'],
+            "rate":movie['rate'],
+            "year":movie['year'],
+            "synopsis":movie['synopsis']
+        }
+        movie_list_dict.append(movie_dict)
+    return movie_list_dict
 
 def update_movie_service(id: str, movie_data: MovieUpdate) -> str:
     updated = update_movie_repo(id, movie_data)

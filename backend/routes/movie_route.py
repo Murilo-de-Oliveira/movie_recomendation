@@ -1,6 +1,7 @@
+from typing import List
 from fastapi import APIRouter, status
 from models.movie_model import MovieCreate, MovieOut, MovieUpdate
-from controllers.movie_controller import create_movie_controller, get_movie_controller, update_movie_controller, delete_movie_controller
+from controllers.movie_controller import create_movie_controller, get_all_movies_controller, get_movie_controller, update_movie_controller, delete_movie_controller
 
 router = APIRouter()
 
@@ -15,6 +16,17 @@ def create_movie_route(movie: MovieCreate) -> dict:
     """Rota de criação de filmes"""
     movie_id = create_movie_controller(movie)
     return {"message": "Filme criado com sucesso!", "id": str(movie_id)}
+
+@router.get(
+    "/all_movies",
+    response_model=List[MovieOut],
+    summary="Obter todos os usuários",
+    description="Retorna os dados públicos (nome e email) de um usuário."
+)
+def get_all_movie_route():
+    """Rota de buscar todos os usuários"""
+    users = get_all_movies_controller()
+    return users
 
 @router.get(
     "/{id}",
