@@ -4,7 +4,6 @@ Backend desenvolvido em Python com FastAPI, utilizando MongoDB e Neo4J para cons
 
 ## 🚧 Status do Projeto
 
-🚀 Em desenvolvimento — MVP em construção  
 📦 Funcionalidades básicas: cadastro de usuários, filmes e relacionamentos de avaliação (RATED) entre eles.
 
 ## 🛠️ Tecnologias Utilizadas
@@ -13,58 +12,14 @@ Backend desenvolvido em Python com FastAPI, utilizando MongoDB e Neo4J para cons
 - MongoDB (armazenamento de dados)
 - Neo4J (modelagem e análise de relacionamentos)
 - Pydantic (validação de dados)
-- Pytest (testes unitários)
 - Uvicorn (servidor ASGI)
 
-## 📂 Estrutura de Pastas (parcial)
+## 📦 Pontos importante para rodar o projeto localmente
 
-.
-├── app/
-│   ├── models/
-│   ├── routes/
-│   ├── services/
-│   └── main.py
-├── tests/
-├── .env.example
-├── requirements.txt
-├── README.md
-└── .gitignore
-
-## 🔄 Funcionalidades Implementadas
-
-- [x] CRUD de usuários
-- [x] CRUD de filmes
-- [x] Relacionamento user-[RATED]->movie com nota e comentário
-- [ ] Sistema de recomendação (em planejamento)
-- [ ] Relacionamentos entre usuários e entre filmes (futuros)
-
-## 📦 Como rodar o projeto localmente
-
-1. Clone o repositório:
-   git clone https://github.com/seu-usuario/movie-recommendation.git
-   cd movie-recommender-backend
-
-2. Crie e ative um ambiente virtual:
-   python -m venv venv
-   source venv/bin/activate  # Windows: venv\Scripts\activate
-
-3. Instale as dependências:
-   pip install -r requirements.txt
-
-4. Configure as variáveis de ambiente:
-   - Copie .env.example para .env e preencha os valores.
-
-5. Inicie o servidor:
-   uvicorn main:app --reload
-
-## 🧪 Rodando os testes
-
-pytest tests/
-
-## 📄 Licença
-
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
-
-## 🙋‍♂️ Autor
-
-Desenvolvido por Murilo de Oliveira.
+O python precisa estar na versão 3.8 para funcionar, visto que o driver do neo4j apresentado pelo professor
+funciona nessa versão.
+No __init__ database do neo4j é necessário trocar as credenciais de acesso para o ambiente local.
+def __init__(self, uri="colocar o ip gerado pelo neo4j sandbox", user="neo4j", password="colocar a senha gerada pelo neo4j sandbox"):
+É necessário ter os seguintes módulos para rodar o projeto: fastapi, neo4j, pymongo, bson, pydantic e uvicorn
+Para iniciar o servidor, é necessário estar na pasta backend e rodar o comando: uvicorn main:app --reload
+O projeto conta com dumps para usuários, filmes e reviews iniciais para testes, basta copiar os valores e colocar no MongoDB e no Neo4J Sandbox

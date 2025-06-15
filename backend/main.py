@@ -2,17 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes import user_route, movie_route, interaction_route
 
-#app = FastAPI(
-#    title="Movie App API",
-#    description="API para gerenciamento de usuários da Movie App.",
-#    version="1.0.0",
-#)
-
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # para testes. Em produção, restrinja!
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
